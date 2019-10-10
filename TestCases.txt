@@ -1,0 +1,36 @@
+Given : tags : [string]
+When : decodeTags(tags:[string])
+Then : items : [Object] must be returned
+
+Given : tags : [string]
+When : decodeBarcodes(tags:[string])
+Then : decodedBarcodes : [Object] must be returned
+
+Given : decodedBarcodes : [Object]
+When : combineItems(decodedBarcodes : [Object])
+Then : items : [Object] must be returned
+
+Given : decodedBarcodes : [Object]
+When : loadItems(decodedBarcodes : [Object])
+Then : itemsWithoutCount : [Object] must be returned
+
+//Calculation of Receipt
+Given : items : [Object]
+When : calculateReceipt(items : [Object])
+Then : receipt : [Object] must be returned
+
+Given : items : [object]
+When : calculateReceiptTotal(items : [object])
+Then : receiptItems : [Object] must be returned
+
+Given : items : [object], promotions : [object]
+When : calculateReceiptItems(items : [object], promotions : [object])
+Then : receiptItems : [Object] must be returned
+
+Given : items : [object]
+When : calculateReceiptSavings(items : [object])
+Then : savings : [Object] must be returned
+
+Given : receipt : [object]
+When : renderReceipt(receipt : [object])
+Then : formattedReceipt : String must be returned
