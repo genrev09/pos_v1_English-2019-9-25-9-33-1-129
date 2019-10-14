@@ -144,56 +144,63 @@ describe('pos', () => {
   expect(actualResult).toEqual(expectedResult);
   });
 
-  // it('should calculate receipt items', () => {
-  //   const items = [
-  //     {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3},
-  //     {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1}
-  //   ];
+  it('should calculate receipt items', () => {
+    const items = [
+      {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3},
+      {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1}
+    ];
     
-  //   const expectedResult = [
-  //     {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
-  //     {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}];
+    const expectedResult = [
+      {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
+      {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}];
 
-  // const actualResult = calculateReceiptItems(items);
+  const actualResult = calculateReceiptItems(items);
   
-  // expect(actualResult).toEqual(expectedResult);
-  // });
+  expect(actualResult).toEqual(expectedResult);
+  });
 
-  // it('should calculate receipt total', () => {
-  //   const receiptItems = [
-  //     {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
-  //     {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}];
-
-    
-  //   const expectedResult = [
-  //     [{barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
-  //      {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}],
-  //      {total : 21.00},
-  //      {saving: 0.00}
-  //   ];
-
-  // const actualResult = calculateReceiptTotal(receiptItems);
-  
-  // expect(actualResult).toEqual(expectedResult);
-  // });
-
-  // it('should calculate receipt savings', () => {
-  //   const receiptItems = [
-  //     {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
-  //     {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}];
+  it('should calculate receipt total', () => {
+    const receiptItems = [
+      {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
+      {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}];
 
     
-  //   const expectedResult = [
-  //     [{barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
-  //      {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}],
-  //      {total : 21.00},
-  //      {saving: 3.00}
-  //   ];
+    const expectedResult = [{
+      receiptItems: [
+        {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
+        {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}
+      ],
+      total : 21.00
+    }];
 
-  // const actualResult = calculateReceiptSavings(receiptItems);
+  const actualResult = calculateReceiptTotal(receiptItems);
   
-  // expect(actualResult).toEqual(expectedResult);
-  // });
+  expect(actualResult).toEqual(expectedResult);
+  });
+
+  it('should calculate receipt savings', () => {
+    const receiptItems = [{
+      receiptItems: [
+        {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
+        {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}
+      ],
+      total : 21.00
+    }];
+
+    
+    const expectedResult = [{
+      receiptItems: [
+        {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
+        {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}
+      ],
+       total : 21.00,
+       saving: 3.00
+    }];
+
+  const actualResult = calculateReceiptSavings(receiptItems);
+  
+  expect(actualResult).toEqual(expectedResult);
+  });
 
   // it('should render receipt', () => {
   //   const receipt = [

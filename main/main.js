@@ -55,40 +55,40 @@ function loadAllPromotions(){
 }
 
 function getReceiptItems(items,promotions){
-    const receiptItems = [];
-    let computeSubtotal = (promotion,count,price) => {
-        let subtotal = 0;
-        if (promotion.type == undefined)
-            return count * price;
-        switch (promotion) {
-            case 'BUY_TWO_GET_ONE_FREE':
-                if(count > 2)
-                    count--;
-                subtotal = count * price;
-                break;
-            case '':
-                subtotal = count * price;
-                break;
-            default:
-                subtotal = count * price;
-                break;
-        }
-        return subtotal;
-    };
     let getPromotion = (barcode) => promotions.filter(promotion => promotion.barcodes.includes(barcode))[0];
     
-    items.forEach(item => {
+    let computeSubtotal = (item) => {
+        let subtotal = item.count * item.price;
         let promotion = getPromotion(item.barcode);
-        receiptItems.push({
-            barcode:item.barcode,
-            name:item.name,
-            price:item.price,
-            unit:item.unit,
-            count:item.count,
-            subtotal:computeSubtotal(promotion, item.count, item.price)
-        });
+        if(promotion != null)
+            subtotal -= item.price;
+        return subtotal;
+    };
+
+    return items.map(item => {
+        item.subtotal = computeSubtotal(item)
+        return item;
     });
-    
-    return receiptItems;
+}
+
+function calculateReceiptItems(items){
+    const promotions = loadAllPromotions();
+    return getReceiptItems(items,promotions);
+}
+
+function calculateReceiptTotal(_receiptItems){
+    const computedSubtotalSum = _receiptItems.map(receiptItem => receiptItem.subtotal)
+                                        .reduce((a,b) => a+b);
+    return [{
+        receiptItems : _receiptItems,
+        total: computedSubtotalSum
+    }];
+}
+
+function calculateReceiptSavings(_receiptItems){
+    const computedTotal = _receiptItems[0].receiptItems.map(receiptItem => receiptItem.count * receiptItem.price)
+                                        .reduce((a,b) => a+b);
+    _receiptItems[0].saving = computedTotal - _receiptItems[0].total;
+    return _receiptItems;
 }
 
