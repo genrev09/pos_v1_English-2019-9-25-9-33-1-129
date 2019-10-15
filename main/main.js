@@ -92,3 +92,9 @@ function calculateReceiptSavings(_receiptItems){
     return _receiptItems;
 }
 
+function calculateReceipt(items){
+    const receiptItems = calculateReceiptItems(items);
+    const receiptItemWithTotal = calculateReceiptTotal(receiptItems);
+    return calculateReceiptSavings(receiptItemWithTotal);
+}
+
