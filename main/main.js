@@ -119,3 +119,9 @@ function determineUnitNoun (count, unit){
     else
         return unit;
 }
+
+function printReceipt(tags){
+    const items = decodeTags(tags);
+    const receipt = calculateReceipt(items);
+    return renderReceipt(receipt);
+}

@@ -247,4 +247,25 @@ describe('pos', () => {
   expect(actualResult).toEqual(expectedResult);
   });
 
+  it('should print receipt using tags', () => {
+    const tags = [
+      'ITEM000001',
+      'ITEM000001',
+      'ITEM000001',
+      'ITEM000003'
+    ];
+    
+    const expectedResult = 
+    "***<store earning no money>Receipt ***\n" +
+    "Name: Sprite, Quantity: 3 bottles, Unit: 3.00(yuan), Subtotal: 6.00(yuan)\n"+
+    "Name: Litchi, Quantity: 1 pound, Unit: 15.00(yuan), Subtotal: 15.00(yuan)\n"+
+    "----------------------\n"+
+    "Total: 21.00(yuan)\n"+
+    "Discounted prices: 3.00(yuan)\n"+
+    "**********************";
+
+  const actualResult = printReceipt(tags);
+  
+  expect(actualResult).toEqual(expectedResult);
+  });
 });
