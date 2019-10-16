@@ -98,3 +98,24 @@ function calculateReceipt(items){
     return calculateReceiptSavings(receiptItemWithTotal);
 }
 
+function renderReceipt(receipt){
+    let formattedReceipt = "***<store earning no money>Receipt ***\n";
+
+    receipt[0].receiptItems.forEach(item => {
+        let itemUnit = determineUnitNoun(item.count,item.unit);
+        formattedReceipt += "Name: " + item.name + ", Quantity: " + item.count + " "+ itemUnit + ", Unit: "+ item.price.toFixed(2) + "(yuan), Subtotal: " + item.subtotal.toFixed(2) + "(yuan)\n"
+    });
+    formattedReceipt += "----------------------\n"+
+               "Total: "+ receipt[0].total.toFixed(2)+"(yuan)\n"+
+               "Discounted prices: " + receipt[0].saving.toFixed(2)+"(yuan)\n"+
+               "**********************";
+
+    return formattedReceipt;
+}
+
+function determineUnitNoun (count, unit){
+    if(count >= 2)
+        return unit+"s";
+    else
+        return unit;
+}

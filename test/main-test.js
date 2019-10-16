@@ -223,26 +223,28 @@ describe('pos', () => {
   expect(actualResult).toEqual(expectedResult);
   });
 
-  // it('should render receipt', () => {
-  //   const receipt = [
-  //     [{barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
-  //      {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}],
-  //      {total : 21.00},
-  //      {saving: 3.00}
-  //   ];
+  it('should render receipt', () => {
+    const receipt = [{
+      receiptItems: [
+        {barcode: 'ITEM000001', name: 'Sprite', price: 3.00, unit:'bottle' , count: 3, subtotal: 6.00},
+        {barcode: 'ITEM000003', name: 'Litchi', price: 15.00, unit:'pound', count: 1, subtotal: 15.00}
+      ],
+       total : 21.00,
+       saving: 3.00
+    }];
     
-  //   const expectedResult = 
-  //   "***<store earning no money>Receipt ***\n" +
-  //   "Name：Sprite，Quantity：3 bottles，Unit：3.00(yuan)，Subtotal：6.00(yuan)\n"+
-  //   "Name：Litchi，Quantity：1 pounds，Unit：15.00(yuan)，Subtotal：15.00(yuan)\n"+
-  //   "----------------------\n"+
-  //   "Total：21.00(yuan)\n"+
-  //   "Discounted prices：3.00(yuan)\n"+
-  //   "**********************";
+    const expectedResult = 
+    "***<store earning no money>Receipt ***\n" +
+    "Name: Sprite, Quantity: 3 bottles, Unit: 3.00(yuan), Subtotal: 6.00(yuan)\n"+
+    "Name: Litchi, Quantity: 1 pound, Unit: 15.00(yuan), Subtotal: 15.00(yuan)\n"+
+    "----------------------\n"+
+    "Total: 21.00(yuan)\n"+
+    "Discounted prices: 3.00(yuan)\n"+
+    "**********************";
 
-  // const actualResult = calculateRenderReceipt(receipt);
+  const actualResult = renderReceipt(receipt);
   
-  // expect(actualResult).toEqual(expectedResult);
-  // });
+  expect(actualResult).toEqual(expectedResult);
+  });
 
 });
